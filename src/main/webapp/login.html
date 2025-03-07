@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full-page background */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            font-family: Arial, sans-serif;
+            background-color: #e6f9e6; /* Light green background color */
+        }
+
+        /* Container for the form */
+        .login-container {
+            background-color: #ffffff; /* White background for the form */
+            padding: 40px; /* Padding around the form */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            width: 70%; /* 70% of the page width */
+            max-width: 500px; /* Max width for larger screens */
+            text-align: center; /* Center text */
+        }
+
+        /* Form styles */
+        h1 {
+            margin-bottom: 20px; /* Spacing below the title */
+            color: #2e7d32; /* Dark green text color */
+        }
+
+        label {
+            display: block; /* Labels on their own lines */
+            margin-bottom: 5px; /* Space below labels */
+            color: #4caf50; /* Medium green color for labels */
+            text-align: left; /* Align labels to the left */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Full width inputs */
+            padding: 10px; /* Padding inside inputs */
+            margin-bottom: 20px; /* Space below inputs */
+            border: 1px solid #4caf50; /* Medium green border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 16px; /* Font size */
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50; /* Primary button color */
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            padding: 10px; /* Padding inside button */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer on hover */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s; /* Transition effect */
+            width: 100%; /* Full width button */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #388e3c; /* Darker green on hover */
+        }
+
+        /* Error message */
+        #message {
+            margin-top: 10px; /* Space above the message */
+            color: red; /* Error message color */
+        }
+
+        /* Signup link style */
+        .signup-link {
+            margin-top: 20px; /* Space above the signup link */
+            color: #4caf50; /* Medium green color for link */
+        }
+
+        .signup-link a {
+            text-decoration: none; /* Remove underline from link */
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <p id="message"></p>
+        <form action="login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+        <p class="signup-link">If you don't have an account, <a href="signup.html">Sign up here</a>.</p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        if (message) {
+            document.getElementById('message').innerText = message;
+        }
+    </script>
+</body>
+</html>

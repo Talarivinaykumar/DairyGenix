@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style for Add to Cart buttons */
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center the buttons */
+            gap: 10px; /* Space between buttons */
+            margin-top: 15px; /* Space above the buttons */
+        }
+
+        .add-to-cart {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-to-cart:hover {
+            background-color: #2ecc71;
+            transform: scale(1.05);
+        }
+
+        .add-to-cart:active {
+            background-color: #1e8449;
+            transform: scale(0.98);
+        }
+
+        /* Additional styles for product cards */
+        .product-card {
+            text-align: center; /* Center text within the product card */
+            padding: 20px; /* Add some padding around the product card */
+            border: 1px solid #ddd; /* Add a light border */
+            border-radius: 10px; /* Round the corners */
+            margin: 10px; /* Space between product cards */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow */
+        }
+        
+        .product-list {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping of product cards */
+            justify-content: center; /* Center the product list */
+        }
+    </style>
+</head>
+<body>
+<header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="products">
+        <h2>Our Products</h2>
+        <div class="product-list">
+            <div class="product-card" data-name="Fresh Milk" data-price="79">
+                <img src="images/milk.jpeg" alt="Milk">
+                <h3>Fresh Milk</h3>
+                <p>Rs 79.0 per litre</p>
+                <p>Pure, organic milk directly from local farms.</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Organic Ghee" data-price="400">
+                <img src="images/ghee.png" alt="Ghee">
+                <h3>Organic Ghee</h3>
+                <p>Rs 400.0 per kg</p>
+                <p>Rich, creamy ghee made from grass-fed cows.</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Farm Cheese" data-price="59">
+                <img src="images/cheese.png" alt="Milk">
+                <h3>Farm Cheese</h3>
+                <p>Rs 59.0 per 100g</p>
+                <p>Delicious, handcrafted cheese from our farms.</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Natural Yogurt" data-price="450">
+                <img src="images/yogurt-900x600.webp" alt="Milk">
+                <h3>Natural Yogurt</h3>
+                <p>Rs 450.0 per 250g</p>
+                <p>Homemade yogurt made from fresh milk.</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Farm Butter" data-price="19">
+                <img src="images/butter.jpeg" alt="Milk">
+                <h3>Farm Butter</h3>
+                <p>Rs 19.0 per 100g</p>
+                <p>Churned from the freshest cream.</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Standardised milk" data-price="89">
+                <img src="images/standard.png" alt="Milk">
+                <h3>Standardised milk</h3>
+                <p>Rs 89.0 per litre</p>
+                <p>Rich and thick cream for all your cooking needs.</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Toned milk" data-price="54">
+                <img src="images/toned.png" alt="Milk">
+                <h3>Toned milk</h3>
+                <p>Rs 54.0 per litre</p>
+                <p>A good balance of nutrients</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-name="Ice cream" data-price="39">
+                <img src="images/ice.jpeg" alt="Milk">
+                <h3>Ice cream</h3>
+                <p>Rs 39.0 </p>
+                <p>A little sweet every day..</p>
+                <div class="button-container">
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Add more product cards as needed -->
+        </div>
+    </section>
+
+    
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.parentElement.parentElement;
+                const name = productCard.getAttribute('data-name');
+                const price = parseFloat(productCard.getAttribute('data-price'));
+
+                // Get existing cart from local storage or initialize it
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Check if the product is already in the cart
+                const existingProduct = cart.find(item => item.name === name);
+                if (existingProduct) {
+                    alert(`${name} is already in your cart.`);
+                    return; // Exit if already in cart
+                }
+
+                // Add product to cart with default quantity of 1
+                cart.push({ name, price, quantity: 1 });
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                alert(`${name} has been added to your cart.`);
+            });
+        });
+    </script>
+</body>
+</html>

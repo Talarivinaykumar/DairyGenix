@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Fresh - Placed Order</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50; /* Fresh green */
+        }
+
+        h3 {
+            color: #388E3C; /* Darker green for headings */
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        #ordered-items {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #e8f5e9; /* Light green background for ordered items */
+        }
+
+        button {
+            background-color: #4CAF50; /* Fresh green */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto; /* Center the button */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50; /* Fresh green */
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px; /* Space above footer */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Confirmation</h2>
+        <p>Your order has been placed successfully!</p>
+
+        <h3>Delivery Details</h3>
+        <p id="order-details"></p>
+
+        <h3>Items Ordered</h3>
+        <div id="ordered-items"></div>
+        <h3>Total Amount</h3>
+        <p id="total-amount"></p>
+        <button onclick="window.location.href='index.html'">Back to Home</button>
+
+      
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        const email = params.get('email');
+        const address = params.get('address');
+    
+        document.getElementById('order-details').innerHTML = `Name: ${name}<br>Email: ${email}<br>Address: ${address}`;
+    
+        // Retrieve total price from local storage
+        const totalPrice = localStorage.getItem('totalPrice');
+        document.getElementById('total-amount').innerHTML = `Total Amount: Rs ${totalPrice}`; // Display total amount
+    
+        // Items ordered (you could also pass item details if necessary)
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const orderedItemsContainer = document.getElementById('ordered-items');
+    
+        cart.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `${item.name} - Rs ${item.price} x ${item.quantity}`;
+            orderedItemsContainer.appendChild(itemDiv);
+        });
+    
+        localStorage.removeItem('cart'); // Clear the cart after order
+        localStorage.removeItem('totalPrice'); // Clear the total price
+    </script>
+    
+</body>
+</html>

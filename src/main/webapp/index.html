@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <!-- Navbar -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="feedback.html">Feed back</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Slider Section -->
+    <section class="slider">
+        <div class="slider-container">
+            <div class="slide">
+                <img src="images/cow10.png" alt="Cow 1">
+            </div>
+            <div class="slide">
+                <img src="images/cow6.jpeg" alt="Product 1">
+            </div>
+            <div class="slide">
+                <img src="images/cow1.jpg" alt="Cow 1">
+            </div>
+            <div class="slide">
+                <img src="images/cows-field.jpg" alt="Product 1">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="products">
+        <h2>Shop now</h2>
+        <div class="product-card">
+            <img src="images/milk.jpeg" alt="Milk">
+            <h3>Milk</h3>
+            <p>Rs 79.0 per litre</p>
+            <p>Dairy Dude milk delivered to your door.</p>
+            <button class="product-btn" onclick="buyNow('Milk', 79)">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="images/ghee.png" alt="Ghee">
+            <h3>Ghee</h3>
+            <p>Pure cow ghee for a healthier lifestyle.</p>
+            <button class="product-btn" onclick="buyNow('Ghee', 150)">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="images/cheese.png" alt="Cheese">
+            <h3>Farm Cheese</h3>
+            <p>Delicious, handcrafted cheese from our farms.</p>
+            <button class="product-btn" onclick="buyNow('Farm Cheese', 120)">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="images/yogurt-900x600.webp" alt="Yogurt">
+            <h3>Natural Yogurt</h3>
+            <p>Homemade yogurt made from fresh milk.</p>
+            <button class="product-btn" onclick="buyNow('Natural Yogurt', 60)">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <img src="images/paneer1.jpeg" alt="Paneer">
+            <h3>Paneer</h3>
+            <p>Homemade paneer made from fresh milk.</p>
+            <button class="product-btn" onclick="buyNow('paneer', 60)">Buy Now</button>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section rights">
+                <p>© 2024 Dairy Dude. All rights reserved.</p>
+            </div>
+            <div class="footer-section contact">
+                <h4>Contact Us</h4>
+                <p>Gmail: <a href="mailto:info@dairydude.com">dairydude2233@gmail.com</a></p>
+                <p>Phone: <a href="tel:+918106865580">+91 8106865580</a></p>
+            </div>
+            <div class="footer-section follow">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                    <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function buyNow(productName, productPrice) {
+            const cartItem = {
+                name: productName,
+                price: productPrice,
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existingItemIndex = cart.findIndex(item => item.name === productName);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            window.location.href = 'cart.html';
+        }
+
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.querySelectorAll('.slide');
+            const sliderContainer = document.querySelector('.slider-container');
+            
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            sliderContainer.style.transform = `translateX(${-slideIndex * 100}%)`;
+
+            setTimeout(showSlides, 3000); 
+        }
+
+        showSlides();
+    </script>
+</body>
+</body>
+</html>
+
+
+
